@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gurodrigues-dev/venture-microservice-emails/config"
@@ -16,7 +17,10 @@ type Postgres struct {
 
 func NewPostgres() (*Postgres, error) {
 
-	conf := config.Get()
+	conf, err := config.Load("config/config.yaml")
+	if err != nil {
+		log.Fatalf("error loading config: %s", err.Error())
+	}
 
 	db, err := sql.Open(
 		"postgres",
