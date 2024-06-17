@@ -29,7 +29,7 @@ func (ct *consumer) Start() {
 	reader := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{conf.Messaging.Brokers},
 		Topic:     conf.Messaging.Topic,
-		Partition: conf.Messaging.Partition,
+		Partition: 1,
 		GroupID:   "reader.kafka.group",
 		MinBytes:  10e3,
 		MaxBytes:  10e6,
